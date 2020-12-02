@@ -24,6 +24,7 @@ class RestaurantsController < ApplicationController
   # POST /restaurants
   # POST /restaurants.json
   def create
+    
     @restaurant = Restaurant.new(restaurant_params)
 
     respond_to do |format|
@@ -69,6 +70,6 @@ class RestaurantsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def restaurant_params
-      params.require(:restaurant).permit(:restaurant_code, :name, :address, :description)
+      params.require(:restaurant).permit(:restaurant_code, :name, :description, :image)
     end
 end

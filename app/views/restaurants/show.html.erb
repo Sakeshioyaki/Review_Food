@@ -11,13 +11,14 @@
 </p>
 
 <p>
-  <strong>Address:</strong>
-  <%= @restaurant.address %>
+  <strong>Description:</strong>
+  <%= @restaurant.description %>
 </p>
 
 <p>
-  <strong>Description:</strong>
-  <%= @restaurant.description %>
+  <% if @restaurant.image.attached? %>
+    <%= image_tag @restaurant.image %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
