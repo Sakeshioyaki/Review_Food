@@ -10,15 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_02_111657) do
+ActiveRecord::Schema.define(version: 2020_12_02_151656) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.integer "restaurant_id"
+    t.string "address_name"
+    t.integer "restaurants_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["restaurants_id"], name: "index_addresses_on_restaurants_id"
+  end
 
   create_table "restaurants", force: :cascade do |t|
     t.string "restaurant_code"
     t.string "name"
-    t.string "address"
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "restaurant_id"
+    t.integer "user_id"
+    t.string "comment"
+    t.integer "users_id"
+    t.integer "restaurants_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["restaurants_id"], name: "index_reviews_on_restaurants_id"
+    t.index ["users_id"], name: "index_reviews_on_users_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -29,8 +49,12 @@ ActiveRecord::Schema.define(version: 2020_12_02_111657) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "full_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "addresses", "restaurants", column: "restaurants_id"
+  add_foreign_key "reviews", "restaurants", column: "restaurants_id"
+  add_foreign_key "reviews", "users", column: "users_id"
 end
