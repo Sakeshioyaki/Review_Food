@@ -24,20 +24,21 @@
 <%= link_to 'Back', restaurants_path %>
 
 <h3>Review List</h3>
-     <ul>
-       <% @restaurant.reviews.each do |review|%><br>
-          <li  class="review">
-          <b><%= review.user.name if review.user%></b><br>
-           <%= review.comment %>
-          </li> 
-        <% end %>
-     </ul>
-     
+<ul>
+  <% @restaurant.restaurant_review.each do |restaurant_review|%>
+  　<div class="card border-light mb-3" style="max-width: 20rem;">
+      <div class="card-header"><%= restaurant_review.user.full_name %></div>
+      <div class="card-body">
+        <p class="card-text"><%= restaurant_review.comment %></p>
+      </div>
+    </div>
+  <% end %>
+</ul>
 <h2>Review Form</h2>
- <%= form_with(local: true, url: restaurant_review_create_path) do |form| %>
+ <%= form_with(model: @restaurant_review, local: true) do |form| %>
    <div class= "field">
      <%= form.text_area :comment, :class => "form-control" %>
-     <%= form.hidden_field :restaurant_id, :value => @restaurant.restaurant_code %>
+     <%= form.hidden_field :restaurant_code, :value => @restaurant.restaurant_code %>
    </div>
    <div class="actions">
      <%= form.submit %>

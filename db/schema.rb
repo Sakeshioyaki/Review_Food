@@ -42,25 +42,20 @@ ActiveRecord::Schema.define(version: 2020_12_03_094019) do
     t.index ["restaurants_id"], name: "index_addresses_on_restaurants_id"
   end
 
-  create_table "restaurants", force: :cascade do |t|
-    t.string "restaurant_code"
-    t.string "name"
-    t.string "address"
-    t.string "description"
+  create_table "restaurant_reviews", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "restaurant_id"
+    t.string "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "reviews", force: :cascade do |t|
-    t.integer "restaurant_id"
-    t.integer "user_id"
-    t.string "comment"
-    t.integer "users_id"
-    t.integer "restaurants_id"
+  create_table "restaurants", force: :cascade do |t|
+    t.string "restaurant_code"
+    t.string "name"
+    t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["restaurants_id"], name: "index_reviews_on_restaurants_id"
-    t.index ["users_id"], name: "index_reviews_on_users_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -79,6 +74,4 @@ ActiveRecord::Schema.define(version: 2020_12_03_094019) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "restaurants", column: "restaurants_id"
-  add_foreign_key "reviews", "restaurants", column: "restaurants_id"
-  add_foreign_key "reviews", "users", column: "users_id"
 end
