@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
          
-  validates :name, presence: true
+  validates :full_name, presence: true
          
   has_many :reviews, -> { order "created_at DESC"}
 end
