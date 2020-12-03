@@ -20,6 +20,38 @@
     <%= image_tag @restaurant.image %>
   <% end %>
 </p>
-
 <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
 <%= link_to 'Back', restaurants_path %>
+
+<h2>Review List</h2>
+     <ul>
+       <% @restaurant.reviews.each do |review|%><br>
+          <li  class="review">
+          <b><%= review.user.name if review.user%></b><br>
+           <%= review.comment %>
+          </li> 
+        <% end %>
+     </ul>
+     
+<h2>Review Form</h2>
+ <%= form_with(model: @review, local: true) do |form| %>
+   <div class= "field">
+     <%= form.text_area :review %>
+     <%= form.hidden_field :restaurant_id, :value => @restaurant.restaurant_code %>
+   </div>
+   <div class="actions">
+     <%= form.submit %>
+   </div>
+ <% end %>
+
+<style>
+    .review{
+        border: 1px solid #000;
+        padding-left:5px;
+        list-style : none;
+        border-radius: 10px;
+        padding-top: 5px;
+        padding-botton: 5px;
+        width: 800px;
+    }
+</style>

@@ -1,0 +1,2 @@
+module RestaurantReviewHelper
+end
