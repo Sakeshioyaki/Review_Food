@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  root 'static_pages#home'
   resources :restaurants
+  get 'users/show'
   get 'static_pages/home'
   get '/', to: redirect('/static_pages/home')
   devise_for :users, controllers: { sessions: 'users/sessions' }
