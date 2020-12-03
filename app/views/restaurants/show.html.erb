@@ -23,7 +23,7 @@
 <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
 <%= link_to 'Back', restaurants_path %>
 
-<h2>Review List</h2>
+<h3>Review List</h3>
      <ul>
        <% @restaurant.reviews.each do |review|%><br>
           <li  class="review">
@@ -34,9 +34,9 @@
      </ul>
      
 <h2>Review Form</h2>
- <%= form_with(model: @review, local: true) do |form| %>
+ <%= form_with(local: true, url: restaurant_review_create_path) do |form| %>
    <div class= "field">
-     <%= form.text_area :review %>
+     <%= form.text_area :comment, :class => "form-control" %>
      <%= form.hidden_field :restaurant_id, :value => @restaurant.restaurant_code %>
    </div>
    <div class="actions">
