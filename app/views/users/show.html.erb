@@ -1,4 +1,10 @@
 <div class="profile">
+<% if @user.avatar.attached? %>
+    <%= image_tag @user.avatar, style: 'height:200px;'%>
+<%else%>
+    <img width="50%" src="/default-avatar.png">
+<% end %>
+
 <h1>Hello <%= @user.full_name %></h1>
 
 <h3>Full Name</h3>
@@ -6,6 +12,8 @@
 
 <h3>Email</h3>
 <%= @user.email %> 
+
+<h3><%= link_to "Edit info", "/users/edit" %>
 </div>
 <style>
 .profile{
