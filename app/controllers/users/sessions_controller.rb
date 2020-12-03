@@ -1,23 +1,22 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
-   before_action :configure_sign_in_params, only: [:create, :new, :show]
-
+    before_action :configure_permitted_parameters, if: :devise_controller?
   #GET /resource/sign_in
-   def new
-     @user = current_user
-     super
-   end
+  #  def new
+  #    @user = current_user
+  #    super
+  #  end
    
-   def show
-     @user = current_user
-   end
+  #  def show
+  #    @user = current_user
+  #  end
 
-  #POST /resource/sign_in
-   def create
-     @user = current_user
-     super
-   end
+  # #POST /resource/sign_in
+  #  def create
+  #    @user = current_user
+  #    super
+  #  end
 
   # DELETE /resource/sign_out
   # def destroy

@@ -7,6 +7,13 @@
 <h3>Email</h3>
 <%= @user.email %> 
 </div>
+
+<p>
+  <% if @user.avatar.attached? %>
+    <%= image_tag @user.avatar %>
+  <% end %>
+</p>
+
 <style>
 .profile{
   width:400px;
