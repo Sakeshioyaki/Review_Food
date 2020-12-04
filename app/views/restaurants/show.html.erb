@@ -14,6 +14,12 @@
   <strong>Description:</strong>
   <%= @restaurant.description %>
 </p>
+<p>
+  <strong>Addresses:</strong>
+  <% @restaurant.addresses.each do |address| %>
+    <br><%= address.address_name %>
+  <% end %>
+</p>
 
 <p>
   <% if @restaurant.image.attached? %>

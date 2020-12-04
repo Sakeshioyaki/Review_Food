@@ -52,21 +52,24 @@ class RestaurantsController < ApplicationController
       end
     end
   end
-  
+
+  def new_address
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    @address = @restaurant.addresses.new
+  end
+
   def update_address
     @restaurant = Restaurant.find(params[:restaurant_id])
-		if @restaurant
-			@address = @restaurant.build_address(address: params[:address])
- 
-  		respond_to do |format|
-	      if @address.save
-          format.html  { redirect_to(@address , :notice => 'Restaurant address was successfully created.') }
-      		format.json  { render :json => @address, :status => :created, :location => @address }
-	      else
-		      format.html  { render :action => "new" }
-          format.json  { render :json => @address.errors,  :status => :unprocessable_entity }
-        end
-       end
+    @address = @restaurant.addresses.new(address_name: params[:address_name])
+
+    respond_to do |format|
+      if @address.save!
+        format.html  { redirect_to(@restaurant , :notice => 'Restaurant address was successfully created.') }
+        format.json  { render :json => @address, :status => :created, :location => @address }
+      else
+        format.html  { render :action => "new_address" }
+        format.json  { render :json => @address.errors,  :status => :unprocessable_entity }
+      end
     end
   end
 
