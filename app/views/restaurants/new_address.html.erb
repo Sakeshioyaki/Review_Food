@@ -1,0 +1,10 @@
+
+<%= form_with(url: "/restaurants/#{@restaurant.id}/update_address", method: "post") do |form|%>
+  <div class="field">
+    <%= form.label :address_name %>
+    <%= form.text_field :address_name %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
